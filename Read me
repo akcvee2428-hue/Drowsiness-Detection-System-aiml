@@ -1,0 +1,37 @@
+# Drowsiness Detection System 🚗💤
+
+## 📌 Overview
+This project detects drowsiness using MPU6050 sensor and alerts using LEDs and buzzer.
+
+## ⚙️ Hardware
+- Arduino Nano
+- MPU6050
+- LEDs
+- Buzzer
+
+## 💻 Software
+- Arduino IDE
+- Python (Serial Monitoring)
+
+## 🔌 Working
+- Arduino reads sensor data
+- Sends data via Serial
+- Python analyzes data
+- LED + Buzzer alerts
+
+## ▶️ How to Run
+
+### Arduino
+Upload code using Arduino IDE
+
+### Python
+Install dependencies:
+pip install -r requirements.txt
+
+Run:
+python detection.py
+
+## 🚀 Future Scope
+- AI model integration
+- Camera-based detection
+- IoT dashboard
