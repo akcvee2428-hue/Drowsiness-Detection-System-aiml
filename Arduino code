@@ -1,0 +1,45 @@
+#include <Wire.h>
+#include <MPU6050.h>
+
+MPU6050 mpu;
+
+const int RED_LED = 6;
+const int GREEN_LED = 5;
+const int BUZZER = 8;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+  mpu.initialize();
+
+  pinMode(RED_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
+
+  Serial.println("MPU6050 Ready");
+}
+
+void loop() {
+  int16_t ax, ay, az;
+  mpu.getAcceleration(&ax, &ay, &az);
+
+  // Send data to Python
+  Serial.print(ax);
+  Serial.print(",");
+  Serial.print(ay);
+  Serial.print(",");
+  Serial.println(az);
+
+  // Basic detection (backup if Python not used)
+  if (ax < 0) {
+    digitalWrite(RED_LED, HIGH);
+    digitalWrite(GREEN_LED, LOW);
+    digitalWrite(BUZZER, HIGH);
+  } else {
+    digitalWrite(RED_LED, LOW);
+    digitalWrite(GREEN_LED, HIGH);
+    digitalWrite(BUZZER, LOW);
+  }
+
+  delay(300);
+}
