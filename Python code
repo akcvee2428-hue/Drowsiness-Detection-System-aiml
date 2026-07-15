@@ -1,0 +1,25 @@
+import serial
+import time
+
+# Change COM port (IMPORTANT)
+ser = serial.Serial('COM3', 9600)  # Windows: COM3 | Linux/Mac: /dev/ttyUSB0
+
+time.sleep(2)
+
+print("System Started... Reading MPU6050 Data")
+
+while True:
+    try:
+        line = ser.readline().decode().strip()
+        ax, ay, az = map(int, line.split(","))
+
+        print(f"AX: {ax}, AY: {ay}, AZ: {az}")
+
+        # Simple drowsiness logic
+        if ax < 0:
+            print("⚠️ DROWSINESS DETECTED!")
+        else:
+            print("✅ Normal")
+
+    except:
+        continue
